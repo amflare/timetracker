@@ -1,0 +1,13 @@
+.btn-primary {
+	color: #fff;
+	background-color: #00305A;
+	border-color: #00223F;
+}
+.btn-success {
+	color: #fff;
+	background-color: #80A74C;
+	border-color: #6B8C40;
+}
+.btn {
+ border-radius: 3px;
+}
