@@ -1,3 +1,10 @@
-<!-- Bootstrap core CSS -->
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/custom.css" rel="stylesheet">
+<?php 
+
+require_once 'database/config.php';
+require_once 'database/connect.php';
+require_once 'Input.php';
+require_once 'security/Auth.php';
+require_once 'security/session_check.php';
+
+
+?>

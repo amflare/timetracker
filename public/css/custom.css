@@ -11,3 +11,13 @@
 .btn {
  border-radius: 3px;
 }
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+	color: #fff;
+	background-color: #00305A;
+}
+a {
+  color: #00305A;
+  text-decoration: none;
+}
