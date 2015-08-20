@@ -22,7 +22,7 @@ class Auth {
 			}
 		}
 	public static function check() {
-		if (isset($_SESSION["username"]) && $_SESSION["username"] == "timothy") {
+		if (isset($_SESSION["id"]) && isset($_SESSION["rank"]) && $_SESSION["rank"] == $_SESSION["pageRank"]) {
 			return true;
 		} else {
 			return false;
