@@ -65,7 +65,7 @@ require_once '../bootstrap.php';
 							<h6 style="color: #F00; ">Login Failed</h6>
 						<?php endif; ?>
 						<div class="form-group">
-							<input type="text" class="form-control" name="adminUser" placeholder="Username">
+							<input type="email" class="form-control" name="adminUser" placeholder="Email">
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-control" name="adminPass" placeholder="Password">

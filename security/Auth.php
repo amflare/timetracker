@@ -2,13 +2,13 @@
 
 class Auth {
 
-		public static function attempt($password, $username, $dbc) {
-			$select = "SELECT id, user_name, password FROM users 
-						WHERE user_name = :username";
+		// attempt only works with admin login. Student login is handled with waterfall code in /student_login.php
+		public static function attempt($password, $email, $dbc) {
+			$select = "SELECT id, password FROM admins WHERE email = :email";
 
 			$stmt = $dbc->prepare($select);
 
-			$stmt->bindValue(':username', $username, PDO::PARAM_STR);
+			$stmt->bindValue(':email', $email, PDO::PARAM_STR);
 			
 	 		$stmt->execute();
 
@@ -16,6 +16,7 @@ class Auth {
 			
 			if (password_verify($password, $credentials[0]["password"])) {
 				$_SESSION["id"] = $credentials[0]["id"];
+				$_SESSION["rank"] = "admin";
 				return true;
 			} else {
 				return false;
