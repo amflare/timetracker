@@ -2,4 +2,6 @@
 
 $_SESSION["pageRank"] = "admin";
 
-?>s
+?>
+
+<!-- View all time logs -->

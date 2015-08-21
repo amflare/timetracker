@@ -231,5 +231,24 @@ body > footer a {
 		<a id="brand" href="http://<?= URL ?>">
 			<img src="/imgs/logo.png">
 		</a>
+		<nav class="menu-main-container">
+			<ul id="menu-main" class="wp-nav-menu">
+				<li id="menu-item-1389" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-1358 current_page_item menu-item-1389">
+					<a href="http://www.pelotonu.org/">Time Logs</a>
+				</li>
+				<li id="menu-item-1405" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1405">
+					<a href="http://www.pelotonu.org/team/">Students</a>
+				</li>
+				<li id="menu-item-1464" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1464">
+					<a href="http://www.pelotonu.org/donate/">Edit Accounts</a>
+				</li>
+				<li id="menu-item-1520" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1520">
+					<a href="http://www.pelotonu.org/blog/">New Account</a>
+				</li>
+				<li id="menu-item-1397" class="highlight menu-item menu-item-type-post_type menu-item-object-page menu-item-1397">
+					<a href="http://www.pelotonu.org/apply/">Logout</a>
+				</li>
+			</ul>
+		</nav>
 	</div>
 </header>

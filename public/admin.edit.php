@@ -3,3 +3,5 @@
 $_SESSION["pageRank"] = "admin";
 
 ?>
+
+<!-- edit account info for admin or student -->

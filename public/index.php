@@ -2,9 +2,10 @@
 
 $exception = true;
 
-require_once '../bootstrap.php';
+require_once '../bootstrap-student.php';
 
-
+// Auth::logout();
+var_dump($_SESSION);
 ?>
 <html ng-app="login">
 <head>
@@ -46,7 +47,7 @@ require_once '../bootstrap.php';
 				</ul>
 				<!-- STUDENT -->
 				<div ng-show="tab.isSet(1)">
-					<form method="POST" action="student_login.php">
+					<form method="POST" action="../student_login.php">
 						<?php if (isset($_SESSION["failedLoginStudent"])) : ?>
 							<h6 style="color: #F00; ">Login Failed</h6>
 						<?php endif; ?>

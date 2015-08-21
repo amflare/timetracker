@@ -4,4 +4,4 @@ $_SESSION["pageRank"] = "admin";
 
 ?>
 
-<!-- Admin home page -->
+<!-- view list of student by cohort -->
