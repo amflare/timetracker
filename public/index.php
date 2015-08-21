@@ -1,6 +1,9 @@
 <?php 
 
+$exception = true;
+
 require_once '../bootstrap.php';
+
 
 ?>
 <html ng-app="login">
@@ -43,18 +46,24 @@ require_once '../bootstrap.php';
 				</ul>
 				<!-- STUDENT -->
 				<div ng-show="tab.isSet(1)">
-					<form method="POST" action="../student_login.php">
+					<form method="POST" action="student_login.php">
+						<?php if (isset($_SESSION["failedLoginStudent"])) : ?>
+							<h6 style="color: #F00; ">Login Failed</h6>
+						<?php endif; ?>
 						<div class="form-group">
 							<input type="text" class="form-control" name="studentUser" placeholder="Username">
 						</div>
 						<div class="form-group">
-							<button class="btn btn-success">Login</button>
+							<button type="submit" class="btn btn-success">Login</button>
 						</div>
 					</form>
 				</div>
 				<!-- ADMIN -->
 				<div class="panel" ng-show="tab.isSet(2)">
 					<form method="POST" action="../admin_login.php">
+						<?php if (isset($_SESSION["failedLoginAdmin"])) : ?>
+							<h6 style="color: #F00; ">Login Failed</h6>
+						<?php endif; ?>
 						<div class="form-group">
 							<input type="text" class="form-control" name="adminUser" placeholder="Username">
 						</div>

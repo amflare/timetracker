@@ -1,6 +1,11 @@
 <?php
 
-require_once '../bootstrap.php';;
+var_dump($_POST);
+
+$exception = true;
+
+require_once '../bootstrap.php';
+
 
 if (Input::has("studentUser")) {
 	$_SESSION["rank"] = "student";
@@ -12,10 +17,14 @@ if (Input::has("studentUser")) {
 	$stmt->execute();
 	$id = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	$_SESSION["id"] = $id[0]['id'];
+	var_dump("Loggedin");
+	var_dump($_SESSION);
 	header("Location: http://" . URL . "/student.index.php");
 	exit();
 } else {
-	$_SESSION["failedLogin"] = true;
+	$_SESSION["failedLoginStudent"] = true;
+	var_dump("notloggedin");
+	var_dump($_SESSION);
 	header("Location: http://" . URL);
 	exit();
 }
