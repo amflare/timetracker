@@ -2,8 +2,6 @@
 
 require_once '../bootstrap-student.php';
 
-var_dump($_SESSION);
-
 
 ?>
 <html ng-app="login">
@@ -20,82 +18,83 @@ var_dump($_SESSION);
 
 	<style>
 
-		.signin {
+		.clockin {
 			width: 500px;
 			max-width: 100%;
-			margin: 25px auto;
+			margin: 35px auto;
 		}
 		form {
 			margin-top: 20px;
 		}
+		#clock {
+			font-size: 4em;
+			font-family:'Ubuntu', Helvetica, sans-serif;
+			font-weight: bold;
+			margin: 0 auto;
+			text-align: center;
+			color: #FFF;
+			background: rgba(0, 48, 90, 0.95);
+			width: 260px;
+			border-bottom-right-radius: 4px;
+			border-bottom-left-radius: 4px;
+		}
+		#goal {
+			font-weight: bold;
+		}
 
 	</style>
 </head>
-<body class="container">
+<body onload="startTime()">
 	<?php require_once '../views/headerstudent.php'; ?>
-	<div class="panel panel-default signin">
+	<div id="clock"></div>
+	<div class="panel panel-default clockin">
 		<div class="panel-body">
-			<section ng-controller="TabController as tab">
-				<ul class="nav nav-pills">
-					<li ng-class="{ active: tab.isSet(1) }" role="presentation">
-						<a href ng-click="tab.setTab(1)">Student</a>
-					</li>
-					<li ng-class="{ active: tab.isSet(2) }" role="presentation">
-						<a href ng-click="tab.setTab(2)">Admin</a>
-					</li>
-				</ul>
-				<!-- STUDENT -->
-				<div ng-show="tab.isSet(1)">
-					<form method="POST" action="student_login.php">
-						<?php if (isset($_SESSION["failedLoginStudent"])) : ?>
-							<h6 style="color: #F00; ">Login Failed</h6>
-						<?php endif; ?>
-						<div class="form-group">
-							<input type="text" class="form-control" name="studentUser" placeholder="Username">
-						</div>
-						<div class="form-group">
-							<button type="submit" class="btn btn-success">Login</button>
-						</div>
-					</form>
+			<?php  ?>
+			<form method="POST" action="clockin.php">
+				<div class="form-group">
+					<textarea class="form-control" name="dailyGoal" placeholder="What is your goal today?"></textarea>
 				</div>
-				<!-- ADMIN -->
-				<div class="panel" ng-show="tab.isSet(2)">
-					<form method="POST" action="../admin_login.php">
-						<?php if (isset($_SESSION["failedLoginAdmin"])) : ?>
-							<h6 style="color: #F00; ">Login Failed</h6>
-						<?php endif; ?>
-						<div class="form-group">
-							<input type="email" class="form-control" name="adminUser" placeholder="Email">
-						</div>
-						<div class="form-group">
-							<input type="password" class="form-control" name="adminPass" placeholder="Password">
-						</div>
-						<div class="form-group">
-							<a href="#" class="forgotPass">Forgot Password</a>
-						</div>
-						<div class="form-group">
-							<button class="btn btn-success">Login</button>
-						</div>
-					</form>
+				<div class="form-group">
+					<button type="submit" class="btn btn-success">Clock In</button>
 				</div>
-			</section>
+			</form>
+			<?php  ?>
+			<div class="alert alert-info"><span id="goal">Goal:</span><?php  ?></div>
+			<form method="POST" action="clockout.php">
+				<div class="form-group">
+					<input type="checkbox" name="metGoal">
+					I achived my goal today
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-success">Clock Out</button>
+				</div>
+			</form>
+			<?php  ?>
 		</div>
 	</div>
 	<?php require_once '../views/footer.php'; ?>
-	<script>
-	// ---AngularJS---
-	var app = angular.module('login', []);
-	app.controller('TabController', function(){
-		this.tab = 1;
 
-		this.setTab = function(newValue){
-			this.tab = newValue;
-		};
+<script>
 
-		this.isSet = function(tabName){
-			return this.tab === tabName;
-		};
-	});
-	</script>
+// clock
+	function startTime() {
+	    var today=new Date();
+	    var h=today.getHours();
+	    var m=today.getMinutes();
+	    var s=today.getSeconds();
+	    m = checkTime(m);
+	    s = checkTime(s);
+	    document.getElementById('clock').innerHTML = h+":"+m+":"+s;
+	    var t = setTimeout(function(){startTime()},500);
+	}
+
+	function checkTime(i) {
+	    if (i<10) {i = "0" + i};  // add zero in front of numbers < 10
+	    return i;
+	}
+</script>
+</head>
+
+
 </body>
 </html>

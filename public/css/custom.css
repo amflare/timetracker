@@ -18,6 +18,11 @@
 	background-color: #00305A;
 }
 a {
-  color: #00305A;
-  text-decoration: none;
+	color: #00305A;
+	text-decoration: none;
+}
+.alert-info {
+	color: #FFF;
+	background: rgba(0, 48, 90, 0.75);
+	border-color: #00223F;
 }
