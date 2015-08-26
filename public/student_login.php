@@ -4,7 +4,7 @@ var_dump($_POST);
 
 $exception = true;
 
-require_once '../bootstrap.php';
+require_once '../bootstrap-student.php';
 
 
 if (Input::has("studentUser")) {

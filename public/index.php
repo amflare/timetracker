@@ -5,7 +5,7 @@ $exception = true;
 require_once '../bootstrap-student.php';
 
 // Auth::logout();
-var_dump($_SESSION);
+// var_dump($_SESSION);
 ?>
 <html ng-app="login">
 <head>
