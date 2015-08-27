@@ -143,44 +143,6 @@ body.no-bottom-padding article {
     color:white;
 }
 
-/*
-Footer
-*/
-body > footer {
-    background:#80A74C;
-    padding:20px 0px;
-    color:white;
-    text-align:center;
-}
-body > footer a {
-    color:white;
-}
-.biglink {
-    font-size:20px;
-    display:inline-block;
-    padding:12px 0px;
-}
-.biglink:hover {
-    color:white;
-}
-#icon-wrap {
-    text-align:center;
-}
-.icon-box {
-    display:inline-block;
-    width:45%;
-    background:white;
-    border-radius:50%;
-    max-width:50px;
-    margin:0px 1px;
-}
-.icon-box div {
-    padding:10px;
-}
-.footnotes {
-    text-align:center;
-}
-
 @media screen and (min-width:736px){
     #brand {
         float:left;
@@ -233,13 +195,13 @@ body > footer a {
 		</a>
 		<nav class="menu-main-container">
 			<ul id="menu-main" class="wp-nav-menu">
-				<li id="menu-item-1389" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-1358 current_page_item menu-item-1389">
-					<a href="http://www.pelotonu.org/">Clock In/Out</a>
+				<li <?php if ($_SERVER["REQUEST_URI"] == "/student.index.php") {echo "class='current-menu-item'";} ?>>
+					<a href="http://<?= URL ?>/student.index.php">Clock In/Out</a>
 				</li>
-				<li id="menu-item-1405" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1405">
-					<a href="http://www.pelotonu.org/team/">Time Logs</a>
+				<li <?php if ($_SERVER["REQUEST_URI"] == "/student.logs.php") {echo "class='current-menu-item'";} ?>>
+					<a href="http://<?= URL ?>/student.logs.php">Time Logs</a>
 				</li>
-				<li id="menu-item-1397" class="highlight menu-item menu-item-type-post_type menu-item-object-page menu-item-1397">
+				<li class="highlight">
 					<a href="http://www.pelotonu.org/apply/">Logout</a>
 				</li>
 			</ul>

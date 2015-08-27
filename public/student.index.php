@@ -39,7 +39,7 @@ if (Input::has("clockout")) {
 	$now = new DateTime($now);
 	$then = new DateTime($then);
 	$diff = $then->diff($now);
-	$diffToLog = $diff->h . ":" . $diff->m . ":" . $diff->s;
+	$diffToLog = $diff->h . ":" . $diff->i . ":" . $diff->s;
 
 	// pull id of rox to edit
 	$select = "SELECT MAX(id) FROM timelogs WHERE student_id = $studentid";

@@ -26,3 +26,6 @@ a {
 	background: rgba(0, 48, 90, 0.75);
 	border-color: #00223F;
 }
+.progress-bar-success {
+	background-color: #80A74C;
+}
