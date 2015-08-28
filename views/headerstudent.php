@@ -195,11 +195,11 @@ body.no-bottom-padding article {
 		</a>
 		<nav class="menu-main-container">
 			<ul id="menu-main" class="wp-nav-menu">
-				<li <?php if ($_SERVER["REQUEST_URI"] == "/student.index.php") {echo "class='current-menu-item'";} ?>>
-					<a href="http://<?= URL ?>/student.index.php">Clock In/Out</a>
+				<li <?php if ($_SERVER["REQUEST_URI"] == "/timeclock") {echo "class='current-menu-item'";} ?>>
+					<a href="http://<?= URL ?>/timeclock">Clock In/Out</a>
 				</li>
-				<li <?php if ($_SERVER["REQUEST_URI"] == "/student.logs.php") {echo "class='current-menu-item'";} ?>>
-					<a href="http://<?= URL ?>/student.logs.php">Time Logs</a>
+				<li <?php if ($_SERVER["REQUEST_URI"] == "/student/logs") {echo "class='current-menu-item'";} ?>>
+					<a href="http://<?= URL ?>/student/logs">Time Logs</a>
 				</li>
 				<li class="highlight">
 					<a href="http://<?= URL ?>/logout">Logout</a>

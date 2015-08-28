@@ -85,7 +85,7 @@ $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				</tr>
 				<?php foreach ($logs as $log) : ?>
 					<tr>
-						<td><?= $log["username"] ?></td>
+						<td><a href="http://<?= URL ?>/admin/student?id=<?= $log["student_id"] ?>"><?= $log["username"] ?></a></td>
 						<td><?= convertDate($log["date_logged"], $log["clock_in"]); ?></td>
 						<td><?= convertDate($log["date_out"], $log["clock_out"]); ?></td>
 						<td><?= $log["length"]; ?></td>

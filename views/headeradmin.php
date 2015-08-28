@@ -233,17 +233,20 @@ body > footer a {
 		</a>
 		<nav class="menu-main-container">
 			<ul id="menu-main" class="wp-nav-menu">
-				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin.index.php") {echo "class='current-menu-item'";} ?>
-					<a href="http://<?= URL ?>/admin.index.php">Time Logs</a>
+                <li <?php if ($_SERVER["REQUEST_URI"] == "/admin") {echo "class='current-menu-item'";} ?>
+                    <a href="http://<?= URL ?>/admin">All Logs</a>
+                </li>
+				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin/reports") {echo "class='current-menu-item'";} ?>
+					<a href="http://<?= URL ?>/admin/reports">Time Logs</a>
 				</li>
-				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin.student.php") {echo "class='current-menu-item'";} ?>>
-					<a href="http://<?= URL ?>/admin.student.php">Students</a>
+				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin/student") {echo "class='current-menu-item'";} ?>>
+					<a href="http://<?= URL ?>/admin/student">Students</a>
 				</li>
-				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin.edit.php") {echo "class='current-menu-item'";} ?>>
-					<a href="http://<?= URL ?>/admin.edit.php">Edit Accounts</a>
+				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin/edit") {echo "class='current-menu-item'";} ?>>
+					<a href="http://<?= URL ?>/admin/edit">Edit Accounts</a>
 				</li>
-				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin.newaccount.php") {echo "class='current-menu-item'";} ?>>
-					<a href="http://<?= URL ?>/admin.newaccount.php">New Account</a>
+				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin/new") {echo "class='current-menu-item'";} ?>>
+					<a href="http://<?= URL ?>/admin/new">New Account</a>
 				</li>
 				<li class="highlight">
 					<a href="http://<?= URL ?>/logout">Logout</a>
