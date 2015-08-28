@@ -202,7 +202,7 @@ body.no-bottom-padding article {
 					<a href="http://<?= URL ?>/student.logs.php">Time Logs</a>
 				</li>
 				<li class="highlight">
-					<a href="http://www.pelotonu.org/apply/">Logout</a>
+					<a href="http://<?= URL ?>/logout">Logout</a>
 				</li>
 			</ul>
 		</nav>

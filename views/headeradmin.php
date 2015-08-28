@@ -233,7 +233,7 @@ body > footer a {
 		</a>
 		<nav class="menu-main-container">
 			<ul id="menu-main" class="wp-nav-menu">
-				<li id="menu-item-1389" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-1358 current_page_item menu-item-1389">
+				<li>
 					<a href="http://www.pelotonu.org/">Time Logs</a>
 				</li>
 				<li id="menu-item-1405" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1405">
@@ -246,7 +246,7 @@ body > footer a {
 					<a href="http://www.pelotonu.org/blog/">New Account</a>
 				</li>
 				<li id="menu-item-1397" class="highlight menu-item menu-item-type-post_type menu-item-object-page menu-item-1397">
-					<a href="http://www.pelotonu.org/apply/">Logout</a>
+					<a href="http://<?= URL ?>/logout">Logout</a>
 				</li>
 			</ul>
 		</nav>
