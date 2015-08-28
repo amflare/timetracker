@@ -233,19 +233,19 @@ body > footer a {
 		</a>
 		<nav class="menu-main-container">
 			<ul id="menu-main" class="wp-nav-menu">
-				<li>
-					<a href="http://www.pelotonu.org/">Time Logs</a>
+				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin.index.php") {echo "class='current-menu-item'";} ?>
+					<a href="http://<?= URL ?>/admin.index.php">Time Logs</a>
 				</li>
-				<li id="menu-item-1405" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1405">
-					<a href="http://www.pelotonu.org/team/">Students</a>
+				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin.student.php") {echo "class='current-menu-item'";} ?>>
+					<a href="http://<?= URL ?>/admin.student.php">Students</a>
 				</li>
-				<li id="menu-item-1464" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1464">
-					<a href="http://www.pelotonu.org/donate/">Edit Accounts</a>
+				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin.edit.php") {echo "class='current-menu-item'";} ?>>
+					<a href="http://<?= URL ?>/admin.edit.php">Edit Accounts</a>
 				</li>
-				<li id="menu-item-1520" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1520">
-					<a href="http://www.pelotonu.org/blog/">New Account</a>
+				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin.newaccount.php") {echo "class='current-menu-item'";} ?>>
+					<a href="http://<?= URL ?>/admin.newaccount.php">New Account</a>
 				</li>
-				<li id="menu-item-1397" class="highlight menu-item menu-item-type-post_type menu-item-object-page menu-item-1397">
+				<li class="highlight">
 					<a href="http://<?= URL ?>/logout">Logout</a>
 				</li>
 			</ul>
