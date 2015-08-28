@@ -120,23 +120,53 @@ $fullName = $firstName . " " . $lastName;
 	.studentName {
 		text-align: center;
 		margin: 20px;
+		margin-bottom: 0px;
 		font-size: 3em;
+	}
+	.standing {
+		text-align: center;
+		margin: 3px;
+		font-size: 1.4em;
+	}
+	.editStanding {
+		font-size: 1.4rem;
+	}
+	.btn {
+		margin-bottom: 20px;
 	}
 
 	</style>
 </head>
 <body class="container">
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<form>
+					<div class="form-grouping">
+						<!-- input select thing -->
+					</div>
+					<div class="form-grouping">
+						<button class="btn btn-success">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 	<?php require_once '../views/headeradmin.php'; ?>
 	<div class="studentName">
 		-- <?= $fullName ?> --
 	</div>
+	<div class="standing">
+		<?= $logs[0]["standing"] ?> <a href="#"><span class="editStanding glyphicon glyphicon-edit"></span></a>
+	</div>
 	<div class="everything">
 		<div class="progress">
 			<div class="progress-bar progress-bar-success progress-bar-striped <?php if ($percent < 10) {echo "black";} ?>" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <?= $percent ?>%">
-			    <?= $schoolHours; ?>
+				<?= $schoolHours; ?>
 			</div>
 		</div>
 	</div>
+	<button class="btn btn-primary">Add Timelog</button>
 	<div class="panel panel-default signin">
 		<table class="table table-striped">
 			<tr>

@@ -233,14 +233,11 @@ body > footer a {
 		</a>
 		<nav class="menu-main-container">
 			<ul id="menu-main" class="wp-nav-menu">
-                <li <?php if ($_SERVER["REQUEST_URI"] == "/admin") {echo "class='current-menu-item'";} ?>
+                <li <?php if ($_SERVER["REQUEST_URI"] == "/admin") {echo "class='current-menu-item'";} ?>>
                     <a href="http://<?= URL ?>/admin">All Logs</a>
                 </li>
-				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin/reports") {echo "class='current-menu-item'";} ?>
+				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin/reports") {echo "class='current-menu-item'";} ?>>
 					<a href="http://<?= URL ?>/admin/reports">Time Logs</a>
-				</li>
-				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin/student") {echo "class='current-menu-item'";} ?>>
-					<a href="http://<?= URL ?>/admin/student">Students</a>
 				</li>
 				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin/edit") {echo "class='current-menu-item'";} ?>>
 					<a href="http://<?= URL ?>/admin/edit">Edit Accounts</a>
