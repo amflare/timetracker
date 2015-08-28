@@ -2,7 +2,7 @@
 
 $exception = true;
 
-require_once '../bootstrap.php';
+require_once '../bootstrap-admin.php';
 
 if (Input::has("adminUser")) {
 	if (Auth::attempt(Input::get("adminPass"), Input::get("adminUser"), $dbc)) {

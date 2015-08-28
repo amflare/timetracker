@@ -30,9 +30,15 @@ $date->sub(new DateInterval('P' . ($dw - 1) . 'D'));
 $monday = $date->format('Y-m-d');
 
 // fetch logs
-$select = "SELECT length FROM timelogs WHERE student_id = $studentid AND clock_in >= $monday";
-$stmt = $dbc->query($select);
+$select = "SELECT length 
+			FROM timelogs 
+			WHERE student_id = $studentid 
+			AND date_logged >= :monday";
+$stmt = $dbc->prepare($select);
+$stmt->bindValue(':monday', $monday, PDO::PARAM_STR);
+$stmt->execute();
 $lengths = $stmt->fetchAll(PDO::FETCH_ASSOC);
+var_dump($lengths);
 
 // add time
 $totalTime = new DateTime('00:00:00');
