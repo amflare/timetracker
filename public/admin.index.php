@@ -22,20 +22,19 @@ $dw = date( "w", strtotime(date("Y-m-d")));
 $date = new DateTime(date("Y-m-d"));
 $date->sub(new DateInterval('P' . ($dw - 1) . 'D'));
 $monday = $date->format('Y-m-d');
-var_dump($date);
-var_dump($monday);
 
 // fetch logs
 $select = "SELECT * 
 			FROM timelogs t 
 			JOIN students s ON s.id = t.student_id
 			WHERE t.date_logged >= :monday
-			AND t.student_id = 2";
+			AND t.student_id = 2
+			ORDER BY t.id DESC 
+			LIMIT 25";
 $stmt = $dbc->prepare($select);
 $stmt->bindValue(':monday', $monday, PDO::PARAM_STR);
 $stmt->execute();
 $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-var_dump($logs);
 
 ?>
 
@@ -73,27 +72,29 @@ var_dump($logs);
 </head>
 <body class="container">
 	<?php require_once '../views/headeradmin.php'; ?>
-	<div class="panel panel-default signin">
-		<table class="table table-striped">
-			<tr>
-				<th>Student</th>
-				<th>Clocked In</th>
-				<th>Clocked Out</th>
-				<th>Time Spent</th>
-				<th>Goal</th>
-				<th>Done?</th>
-			</tr>
-			<?php foreach ($logs as $log) : ?>
+	<div class="everything">
+		<div class="panel panel-default signin">
+			<table class="table table-striped">
 				<tr>
-					<td></td>
-					<td><?= convertDate($log["date_logged"], $log["clock_in"]); ?></td>
-					<td><?= convertDate($log["date_out"], $log["clock_out"]); ?></td>
-					<td><?= $log["length"]; ?></td>
-					<td><?= $log["goal"]; ?></td>
-					<td class="icon"><span <?php if ($log["goal_reached"] == "1") {echo 'class="glyphicon glyphicon-ok"';} ?>></span></td>
+					<th>Student</th>
+					<th>Clocked In</th>
+					<th>Clocked Out</th>
+					<th>Time Spent</th>
+					<th>Goal</th>
+					<th>Done?</th>
 				</tr>
-			<?php endforeach; ?>
-		</table>
+				<?php foreach ($logs as $log) : ?>
+					<tr>
+						<td><?= $log["username"] ?></td>
+						<td><?= convertDate($log["date_logged"], $log["clock_in"]); ?></td>
+						<td><?= convertDate($log["date_out"], $log["clock_out"]); ?></td>
+						<td><?= $log["length"]; ?></td>
+						<td><?= $log["goal"]; ?></td>
+						<td class="icon"><span <?php if ($log["goal_reached"] == "1") {echo 'class="glyphicon glyphicon-ok"';} ?>></span></td>
+					</tr>
+				<?php endforeach; ?>
+			</table>
+		</div>
 	</div>
 	<?php require_once '../views/footer.php'; ?>
 </body>
