@@ -18,7 +18,11 @@ function convertDate($date, $time) {
 
 // get timelogs for student
 $studentid = $_SESSION["id"];
-$select = "SELECT * FROM timelogs WHERE student_id = $studentid ORDER BY id DESC LIMIT 25";
+$select = "SELECT * 
+			FROM timelogs 
+			WHERE student_id = $studentid 
+			ORDER BY id DESC 
+			LIMIT 25";
 $stmt = $dbc->query($select);
 $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
