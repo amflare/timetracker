@@ -16,6 +16,28 @@ function convertDate($date, $time) {
 	}
 }
 
+// check if modal prompted refresh
+if (Input::has("standingChange")) {
+	// change standing in DB
+	$id = Input::get("id");
+	$standing = Input::get("standingChange");
+
+	$update = "UPDATE students 
+ 				SET standing = :standing 
+ 				WHERE id = :id";
+	$stmt = $dbc->prepare($update);
+	$stmt->bindValue(':standing', $standing, PDO::PARAM_STR);
+	$stmt->bindValue(':id', $id, PDO::PARAM_STR);
+	$stmt->execute();
+
+}
+
+// check if add timelog promted refresh
+if (Input::had("")) {
+	// add log to db.
+
+}
+
 // get timelogs for student
 $studentid = Input::get("id");
 $select = "SELECT * , t.id
@@ -134,30 +156,42 @@ $fullName = $firstName . " " . $lastName;
 	.btn {
 		margin-bottom: 20px;
 	}
+	#standingModal {
+		top: 25%;
+	}
+	.standingForm {
+		margin: 10px;
+	}
 
 	</style>
 </head>
 <body class="container">
-	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<?php require_once '../views/headeradmin.php'; ?>
+	<div class="modal fade" id="standingModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
-				<form>
-					<div class="form-grouping">
-						<!-- input select thing -->
+				<form class="standingForm" method="post">
+					<div class="form-group">
+						<select class="form-control" name="standingChange">
+							<option value="Good">Good</option>
+							<option value="Written Warning">Written Warning</option>
+							<option value="Probation">Probation</option>
+							<option value="Loss of Scholarship">Loss of Scholarship</option>
+							<option value="Inactive">Inactive</option>
+						</select>
 					</div>
-					<div class="form-grouping">
+					<div class="form-group">
 						<button class="btn btn-success">Save</button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	<?php require_once '../views/headeradmin.php'; ?>
 	<div class="studentName">
 		-- <?= $fullName ?> --
 	</div>
 	<div class="standing">
-		<?= $logs[0]["standing"] ?> <a href="#"><span class="editStanding glyphicon glyphicon-edit"></span></a>
+		<?= $logs[0]["standing"] ?> <a href="#" data-toggle="modal" data-target="#standingModal"><span class="editStanding glyphicon glyphicon-edit"></span></a>
 	</div>
 	<div class="everything">
 		<div class="progress">
