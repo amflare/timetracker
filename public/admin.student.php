@@ -4,6 +4,9 @@ $_SESSION["pageRank"] = "admin";
 
 require_once '../bootstrap-admin.php';
 
+// in case of edit
+$_SESSION["last_timesheet"] = Input::get("id");
+
 function convertDate($date, $time) {
 	if ($date && $time) {
 		$date = new DateTime($date);
@@ -205,7 +208,7 @@ $fullName = $firstName . " " . $lastName;
 			<div class="modal-content">
 				<form class="formMargin" method="post">
 					<div class="form-group">
-						<input type="text" id="pickDate" name="pickDate" class="form-control" placeholder="Pick Day..." required>
+						<input type="text" id="pickDate" name="pickDate" class="form-control" placeholder="Pick Day...">
 					</div>
 					<div class="form-group">
 						<input type="text" id="pickTime" name="pickTime" class="form-control" placeholder="Pick Time..." required>
