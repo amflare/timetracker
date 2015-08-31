@@ -12,6 +12,9 @@ switch ($frontController[0]) {
 	case '/admin/reports':
 		include 'admin.view.php';
 		break;
+	case '/admin/reports/cohort':
+		include 'admin.viewcohorts.php';
+		break;
 	case '/admin/edit':
 		include 'admin.edit.php';
 		break;

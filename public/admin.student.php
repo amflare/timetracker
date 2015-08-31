@@ -118,7 +118,7 @@ $fullName = $firstName . " " . $lastName;
 	<meta name="author" content="Timothy Birrell">
 
 	
-	<title>Time Tracker</title>
+	<title><?= $fullName ?></title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
