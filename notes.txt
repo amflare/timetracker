@@ -1,0 +1,5 @@
+1) Add weekly goal edit to admin student page
+
+
+##current
+figure out how to get info anf foreach it into the table in admin.view line 20
