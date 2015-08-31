@@ -19,7 +19,7 @@ if (Input::has("studentUser")) {
 	$_SESSION["id"] = $id[0]['id'];
 	var_dump("Loggedin");
 	var_dump($_SESSION);
-	header("Location: http://" . URL . "/clock");
+	header("Location: http://" . URL . "/timeclock");
 	exit();
 } else {
 	$_SESSION["failedLoginStudent"] = true;

@@ -33,9 +33,16 @@ if (Input::has("standingChange")) {
 }
 
 // check if add timelog promted refresh
-if (Input::had("")) {
-	// add log to db.
+if (Input::has("pickDate")) {
+	$insert = "INSERT INTO timelogs (date_logged, clock_in, goal, student_id) 
+				VALUES (:date_logged, :clock_in, :goal, :student_id)";
+	$stmt = $dbc->prepare($insert);
+	$stmt->bindValue(':date_logged', Input::get('pickDate'), PDO::PARAM_STR);
+	$stmt->bindValue(':clock_in', Input::get('pickTime'), PDO::PARAM_STR);
+	$stmt->bindValue(':goal', Input::get('setGoal'), PDO::PARAM_STR);
+	$stmt->bindValue(':student_id', Input::get('id'), PDO::PARAM_STR);
 
+	$stmt->execute();
 }
 
 // get timelogs for student
@@ -113,6 +120,9 @@ $fullName = $firstName . " " . $lastName;
 	<!-- Bootstrap core CSS -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/custom.css" rel="stylesheet">
+	<link href="/css/classic.css" rel="stylesheet">
+	<link href="/css/classic.date.css" rel="stylesheet">
+	<link href="/css/classic.time.css" rel="stylesheet">
 
 	<style>
 	.everything {
@@ -159,7 +169,10 @@ $fullName = $firstName . " " . $lastName;
 	#standingModal {
 		top: 25%;
 	}
-	.standingForm {
+	#addLogModal {
+		top: 25%;
+	}
+	.formMargin {
 		margin: 10px;
 	}
 
@@ -170,7 +183,7 @@ $fullName = $firstName . " " . $lastName;
 	<div class="modal fade" id="standingModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
-				<form class="standingForm" method="post">
+				<form class="formMargin" method="post">
 					<div class="form-group">
 						<select class="form-control" name="standingChange">
 							<option value="Good">Good</option>
@@ -182,6 +195,26 @@ $fullName = $firstName . " " . $lastName;
 					</div>
 					<div class="form-group">
 						<button class="btn btn-success">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="addLogModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<form class="formMargin" method="post">
+					<div class="form-group">
+						<input type="text" id="pickDate" name="pickDate" class="form-control" placeholder="Pick Day..." required>
+					</div>
+					<div class="form-group">
+						<input type="text" id="pickTime" name="pickTime" class="form-control" placeholder="Pick Time..." required>
+					</div>
+					<div class="form-group">
+						<textarea name="setGoal" class="form-control" placeholder="Add Daily Goal"></textarea>
+					</div>
+					<div class="form-group">
+						<button class="btn btn-success">Add</button>
 					</div>
 				</form>
 			</div>
@@ -200,7 +233,7 @@ $fullName = $firstName . " " . $lastName;
 			</div>
 		</div>
 	</div>
-	<button class="btn btn-primary">Add Timelog</button>
+	<button class="btn btn-primary" data-toggle="modal" data-target="#addLogModal">Add Timelog</button>
 	<div class="panel panel-default signin">
 		<table class="table table-striped">
 			<tr>
@@ -224,5 +257,20 @@ $fullName = $firstName . " " . $lastName;
 		</table>
 	</div>
 	<?php require_once '../views/footer.php'; ?>
+	<script>
+		// ---DatePicker---
+		$("#pickDate").pickadate({
+			format: "yyyy/mm/dd"
+		});
+		// ---TimePicker---
+		$("#pickTime").pickatime({
+			format: "h:i a",
+			formatSubmit: "HH:i:00",
+			hiddenName: true,
+			interval: 15,
+			min: [9,0],
+  			max: [17,0]
+		});
+	</script>
 </body>
 </html>

@@ -6,6 +6,6 @@ require_once '../bootstrap-student.php';
 
 Auth::logout();
 
-header("Location: http://<?= URL ?>")
+header("Location: http://" . URL)
 
 ?>
