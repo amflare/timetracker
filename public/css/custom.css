@@ -39,3 +39,6 @@ a {
   background-color: #0C3961;
   border-color: #d6e9c6;
 }
+.alertify-log-success {
+	background: #80A74C;
+}
