@@ -24,18 +24,26 @@ function findTime($id, $dbc, $monday = null) {
 		$date = new DateTime(date("Y-m-d"));
 		$date->sub(new DateInterval('P' . ($dw - 1) . 'D'));
 		$monday = $date->format('Y-m-d');
+		//find friday
+		$friday = new DateTime(date("Y-m-d"));
+		$friday = $friday->format('Y-m-d');
 	} else {
 		$date = new DateTime($monday);
 		$monday = $date->format('Y-m-d');
+		$friday = new DateTime($monday);
+		$friday->add(new DateInterval('P4D'));
+		$friday = $friday->format('Y-m-d');
 	}
 
 	// fetch logs
 	$select = "SELECT length 
 				FROM timelogs 
 				WHERE student_id = $id 
-				AND date_logged >= :monday";
+				AND date_logged >= :monday
+				AND date_logged <= :friday";
 	$stmt = $dbc->prepare($select);
 	$stmt->bindValue(':monday', $monday, PDO::PARAM_STR);
+	$stmt->bindValue(':friday', $friday, PDO::PARAM_STR);
 	$stmt->execute();
 	$lengths = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -85,6 +93,13 @@ function parseName($username) {
 	<!-- Bootstrap core CSS -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/custom.css" rel="stylesheet">
+	<!-- DatePicker -->
+	<link href="/css/classic.css" rel="stylesheet">
+	<link href="/css/classic.date.css" rel="stylesheet">
+	<link href="/css/classic.time.css" rel="stylesheet">
+	<!-- Alertify -->
+	<link rel="stylesheet" href="/css/alertify.core.css" />
+	<link rel="stylesheet" href="/css/alertify.default.css" />
 
 	<style>
 	.everything {
@@ -106,18 +121,32 @@ function parseName($username) {
 	.name {
 		width:auto;
    		text-align:right;
-   		white-space: nowrap
+   		white-space: nowrap;
 	}
 	.bar {
 		width: 100%; 
 	}
-
+	.progress {
+		margin-bottom: 0;
+	}
+	.cohortBtn {
+		margin-bottom: 10px;
+	}
 
 	</style>
 </head>
 <body class="container">
 	<?php require_once '../views/headeradmin.php'; ?>
 	<div class="everything">
+		<form class="form-inline" id="formMonday" method="post">
+			<div class="form-group">
+				<input type="text" name="pickMonday" id="pickMonday" class="form-control"placeholder="Pick a Monday">
+			</div>
+			<div class="form-group">
+				<button class="btn btn-primary btnMonday"><span class="glyphicon glyphicon-search"></span></button>
+			</div>
+		</form>
+		<button class="btn btn-success cohortBtn">View by Cohort</button>
 		<div class="panel panel-default signin">
 			<table class="table table-striped table-condensed">
 				<tr>
@@ -128,7 +157,11 @@ function parseName($username) {
 				<?php 
 
 				$fullName = parseName($student["username"]);
-				$time = findTime($student["id"], $dbc);
+				if (Input::has("pickMonday")) {
+					$time = findTime($student["id"], $dbc, Input::get("pickMonday"));
+				} else {
+					$time = findTime($student["id"], $dbc);
+				}
 				$percentage = calculatePercentage($time);
 				?>
 				<tr>
@@ -146,5 +179,24 @@ function parseName($username) {
 		</div>
 	</div>
 	<?php require_once '../views/footer.php'; ?>
+	<script>
+		$("#pickMonday").pickadate({
+			format: "yyyy/mm/dd",
+			firstDay: 1,
+		});
+		$(".btnMonday").click(function(e){
+			e.preventDefault();
+			var date = $("#pickMonday").val();
+			date = new Date(date);
+			date = date.getDay();
+			if (date == 1) {
+				console.log("test");
+				$("#formMonday").submit();
+			} else {
+				alertify.error('You need to choose a Monday');
+			}
+
+		})
+	</script>
 </body>
 </html>

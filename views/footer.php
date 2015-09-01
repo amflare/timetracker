@@ -9,3 +9,5 @@
 <script src="/js/picker.js"></script>
 <script src="/js/picker.date.js"></script>
 <script src="/js/picker.time.js"></script>
+<!-- AlertifyJS -->
+<script src="/js/alertify.js"></script>
