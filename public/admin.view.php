@@ -165,7 +165,7 @@ function parseName($username) {
 				$percentage = calculatePercentage($time);
 				?>
 				<tr>
-					<td class="name"><?= $fullName ?></td>
+					<td class="name"><a href="http://<?= URL ?>/admin/student?id=<?= $student["id"] ?>"><?= $fullName ?></a></td>
 					<td class="bar">
 						<div class="progress">
 							<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <?= $percentage ?>%">
