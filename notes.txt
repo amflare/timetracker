@@ -1,1 +1,2 @@
 1) Add weekly goal edit to admin student page
+2) make names full vs user on admin index
