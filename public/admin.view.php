@@ -132,7 +132,9 @@ function parseName($username) {
 	.cohortBtn {
 		margin-bottom: 10px;
 	}
-
+	.head {
+		background-color: #0C3961;
+	}
 	</style>
 </head>
 <body class="container">
@@ -146,13 +148,14 @@ function parseName($username) {
 				<button class="btn btn-primary btnMonday"><span class="glyphicon glyphicon-search"></span></button>
 			</div>
 		</form>
-		<button class="btn btn-success cohortBtn">View by Cohort</button>
-		<div class="panel panel-default signin">
+		<a href="http://<?= URL ?>/admin/reports/cohort">
+			<button class="btn btn-success cohortBtn">View by Cohort</button>
+		</a>
+		<div class="panel panel-primary signin">
+			<div class="panel-heading">
+				<h3 class="panel-title">Students</h3>
+			</div>
 			<table class="table table-striped table-condensed">
-				<tr>
-					<th>Student</th>
-					<th>Progress</th>
-				</tr>
 				<?php foreach ($students as $student) : ?>
 				<?php 
 

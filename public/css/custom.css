@@ -1,6 +1,6 @@
 .btn-primary {
 	color: #fff;
-	background-color: #00305A;
+	background-color: #0C3961;
 	border-color: #00223F;
 }
 .btn-success {
@@ -15,7 +15,7 @@
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
 	color: #fff;
-	background-color: #00305A;
+	background-color: #0C3961;
 }
 a {
 	color: #00305A;
@@ -33,4 +33,9 @@ a {
 }
 .progress-bar-success {
 	background-color: #80A74C;
+}
+.panel-primary > .panel-heading {
+  color: #FFF;
+  background-color: #0C3961;
+  border-color: #d6e9c6;
 }
