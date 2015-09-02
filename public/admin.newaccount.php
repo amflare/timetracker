@@ -10,6 +10,7 @@ $select = "SELECT *
 $stmt = $dbc->query($select);
 $cohorts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+$success = false;
 
 // if form has been submitted
 if (Input::has("accountType")) {	
