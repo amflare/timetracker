@@ -18,6 +18,9 @@ switch ($frontController[0]) {
 	case '/admin/edit':
 		include 'admin.edit.php';
 		break;
+	case '/admin/edit/account':
+		include 'admin.editaccount.php';
+		break;
 	case '/admin/edit/log':
 		include 'admin.editlog.php';
 		break;
