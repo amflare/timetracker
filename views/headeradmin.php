@@ -6,26 +6,26 @@ Version: 0.1
 */
 
 h1 {
-    font-size:30px;
-    color:#00305A;
-    font-family:'Ubuntu', Helvetica, sans-serif;
+	font-size:30px;
+	color:#00305A;
+	font-family:'Ubuntu', Helvetica, sans-serif;
 }
 h2 {
-    color: #80A74C;
-    font-size: 26px;
-    font-family:'Ubuntu', Helvetica, sans-serif;
-    font-weight: 300;
+	color: #80A74C;
+	font-size: 26px;
+	font-family:'Ubuntu', Helvetica, sans-serif;
+	font-weight: 300;
 }
 h3 {
-    color: #80A74C;
-    font-size: 22px;
-    font-family:'Ubuntu', Helvetica, sans-serif;
-    font-weight: 300;
+	color: #80A74C;
+	font-size: 22px;
+	font-family:'Ubuntu', Helvetica, sans-serif;
+	font-weight: 300;
 }
 h1:first-child,
 h2:first-child,
 h3:first-child {
-    margin-top:0px;
+	margin-top:0px;
 }
 
 img {
@@ -36,27 +36,27 @@ img {
 
 /* header */
 #brand {
-    display:inline-block;
+	display:inline-block;
 }
 
 .box {
-    display:block;
-    position:relative;
+	display:block;
+	position:relative;
 }
 a.box {
-    display:inline-block;
+	display:inline-block;
 }
 .box:before {
-    display:block;
-    content: "";
-    padding-bottom:100%;
+	display:block;
+	content: "";
+	padding-bottom:100%;
 }
 .box > div {
-    position:absolute;
-    top:0px;
-    left:0px;
-    right:0px;
-    bottom:0px;
+	position:absolute;
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:0px;
 }
 body > header {
   background: #00305A;
@@ -66,41 +66,41 @@ body > header {
   text-align:center;
 }
 @supports (-webkit-backdrop-filter: blur(20px)) {
-    body > header {
-        -webkit-backdrop-filter: blur(20px) saturate(300%);
-        background: rgba(0, 48, 90, 0.85);
-    }
+	body > header {
+		-webkit-backdrop-filter: blur(20px) saturate(300%);
+		background: rgba(0, 48, 90, 0.85);
+	}
 }
 
 /* Hero */
 .green-header,
 .white-header {
-    padding:10px;
-    background:white;
-    float:left;
-    clear:both;
-    background-color:#80A74C;
-    background-color:rgba(128, 167, 76, 0.9);
-    color:white;
-    margin:0px;
-    font-weight:200;
+	padding:10px;
+	background:white;
+	float:left;
+	clear:both;
+	background-color:#80A74C;
+	background-color:rgba(128, 167, 76, 0.9);
+	color:white;
+	margin:0px;
+	font-weight:200;
 }
 .white-header {
-    background-color:white;
-    background-color:rgba(255, 255, 255, 0.93);
-    color:#80A74C;
-    font-size:22px;
+	background-color:white;
+	background-color:rgba(255, 255, 255, 0.93);
+	color:#80A74C;
+	font-size:22px;
 }
 
 /* General Content */
 article {
-    padding:30px 0px;
+	padding:30px 0px;
 }
 body.no-top-padding article {
-    padding-top:0px;
+	padding-top:0px;
 }
 body.no-bottom-padding article {
-    padding-bottom:0px;
+	padding-bottom:0px;
 }
 
 
@@ -116,114 +116,117 @@ body.no-bottom-padding article {
 
 /* Nav Menu */
 .menu-main-container {
-    margin-top:10px;
+	margin-top:10px;
 }
 .wp-nav-menu {
 	list-style:none;
-    margin:0px;
-    padding:0px;
-    font-family:'Ubuntu', Helvetica, sans-serif;
-    text-align:center;
+	margin:0px;
+	padding:0px;
+	font-family:'Ubuntu', Helvetica, sans-serif;
+	text-align:center;
 }
 .wp-nav-menu > li {
-    display:inline-block;
+	display:inline-block;
 }
 .wp-nav-menu > li a {
-    display:block;
-    padding:10px;
-    color:#aaa;
-    font-size:18px;
+	display:block;
+	padding:10px;
+	color:#aaa;
+	font-size:18px;
 }
 .wp-nav-menu li.highlight a {
-    background:#80A74C;
-    color:white;
-    border-radius:3px;
+	background:#80A74C;
+	color:white;
+	border-radius:3px;
 }
 .wp-nav-menu li.current-menu-item a {
-    color:white;
+	color:white;
+}
+.wp-nav-menu li.current-menu-item-grey a {
+	color:#aaa;
 }
 
 /*
 Footer
 */
 body > footer {
-    background:#80A74C;
-    padding:20px 0px;
-    color:white;
-    text-align:center;
+	background:#80A74C;
+	padding:20px 0px;
+	color:white;
+	text-align:center;
 }
 body > footer a {
-    color:white;
+	color:white;
 }
 .biglink {
-    font-size:20px;
-    display:inline-block;
-    padding:12px 0px;
+	font-size:20px;
+	display:inline-block;
+	padding:12px 0px;
 }
 .biglink:hover {
-    color:white;
+	color:white;
 }
 #icon-wrap {
-    text-align:center;
+	text-align:center;
 }
 .icon-box {
-    display:inline-block;
-    width:45%;
-    background:white;
-    border-radius:50%;
-    max-width:50px;
-    margin:0px 1px;
+	display:inline-block;
+	width:45%;
+	background:white;
+	border-radius:50%;
+	max-width:50px;
+	margin:0px 1px;
 }
 .icon-box div {
-    padding:10px;
+	padding:10px;
 }
 .footnotes {
-    text-align:center;
+	text-align:center;
 }
 
 @media screen and (min-width:736px){
-    #brand {
-        float:left;
-    }
-    .menu-main-container {
-        float: right;
-        margin-top:3px;
-    }
-    body {
-      margin-top: 94px;
-    }
-    body.home,
-    body.home.admin-bar {
-        margin-top:0px;
-    }
-    body > header {
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        right: 0px;
-        z-index: 99999;
-        text-align:left;
-    }
+	#brand {
+		float:left;
+	}
+	.menu-main-container {
+		float: right;
+		margin-top:3px;
+	}
+	body {
+	  margin-top: 94px;
+	}
+	body.home,
+	body.home.admin-bar {
+		margin-top:0px;
+	}
+	body > header {
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		right: 0px;
+		z-index: 99999;
+		text-align:left;
+	}
 
-    body.admin-bar > header {
-        top: 32px;
-    }
+	body.admin-bar > header {
+		top: 32px;
+	}
 }
 @media screen and (min-width:768px){
-    .biglink {
-        font-size:24px;
-        padding:5px 0px;
-    }
+	.biglink {
+		font-size:24px;
+		padding:5px 0px;
+	}
 
-    article {
-        padding:50px 0px;
-    }
-    body.no-top-padding article {
-        padding-top:0px;
-    }
-    body.no-bottom-padding article {
-        padding-bottom:0px;
-    }
+	article {
+		padding:50px 0px;
+	}
+	body.no-top-padding article {
+		padding-top:0px;
+	}
+	body.no-bottom-padding article {
+		padding-bottom:0px;
+	}
 }
 </style>
 <header>
@@ -233,18 +236,25 @@ body > footer a {
 		</a>
 		<nav class="menu-main-container">
 			<ul id="menu-main" class="wp-nav-menu">
-                <li <?php if ($_SERVER["REQUEST_URI"] == "/admin") {echo "class='current-menu-item'";} ?>>
-                    <a href="http://<?= URL ?>/admin">All Logs</a>
-                </li>
+				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin") {echo "class='current-menu-item'";} ?>>
+					<a href="http://<?= URL ?>/admin">All Logs</a>
+				</li>
 				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin/reports") {echo "class='current-menu-item'";} ?>>
 					<a href="http://<?= URL ?>/admin/reports">Time Logs</a>
 				</li>
-				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin/edit") {echo "class='current-menu-item'";} ?>>
-					<a href="http://<?= URL ?>/admin/edit">Edit Accounts</a>
-				</li>
-				<li <?php if ($_SERVER["REQUEST_URI"] == "/admin/new") {echo "class='current-menu-item'";} ?>>
-					<a href="http://<?= URL ?>/admin/new">New Account</a>
-				</li>
+				<li role="presentation" class="dropdown <?php if ($_SERVER["REQUEST_URI"] == "/admin/edit" || $_SERVER["REQUEST_URI"] == "/admin/new") {echo "current-menu-item";} ?>">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+						Accounts <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li class="current-menu-item-grey">
+							<a href="http://<?= URL ?>/admin/edit">Edit Accounts</a>
+						</li>
+						<li class="current-menu-item-grey">
+							<a href="http://<?= URL ?>/admin/new">New Account</a>
+						</li>
+					</ul>
+				  </li>
 				<li class="highlight">
 					<a href="http://<?= URL ?>/logout">Logout</a>
 				</li>
