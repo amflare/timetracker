@@ -1,2 +1,0 @@
-
-2) make names full vs user on admin index
