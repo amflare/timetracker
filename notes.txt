@@ -1,3 +1,2 @@
 
 2) make names full vs user on admin index
-3) change timelog edit confirmation to alertify

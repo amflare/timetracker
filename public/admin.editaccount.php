@@ -158,20 +158,28 @@ function addAdmin($id, $dbc) {
 		<div class="panel-body">
 			<?php if ($type == "student") : ?>
 				<!-- EDIT STUDENT -->
+				<div class="alert alert-info" role="alert">
+					Note: Username will not automatically change to match name changes. It must be done manually.
+				</div>
 				<form class="studentForm" method="post">
 					<div class="form-group">
-						<input type="text" class="form-control" name="username" value="<?= $student[0]["username"] ?>">
+						<label for="username">Username</label>
+						<input type="text" class="form-control" name="username" id="username" value="<?= $student[0]["username"] ?>">
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" name="firstName" value="<?= $student[0]["first_name"] ?>">
+						<label for="firstName">First Name</label>
+						<input type="text" class="form-control" name="firstName" id="firstName" value="<?= $student[0]["first_name"] ?>">
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" name="lastName" value="<?= $student[0]["last_name"] ?>">
+						<label for="lastName">Last Name</label>
+						<input type="text" class="form-control" name="lastName" id="lastName" value="<?= $student[0]["last_name"] ?>">
 					</div>
 					<div class="form-group">
-						<input type="email" class="form-control" name="email" value="<?= $student[0]["email"] ?>">
+						<label for="email">Email</label>
+						<input type="email" class="form-control" name="email" id="email" value="<?= $student[0]["email"] ?>">
 					</div>
 					<div class="form-group">
+						<label for="cohort">Cohort</label>
 						<select class="form-control" id="cohort" name="cohort">
 							<?php foreach ($cohorts as $cohort) : ?>
 								<option value="<?= $cohort["id"] ?>"><?= $cohort["name"] ?></option>
