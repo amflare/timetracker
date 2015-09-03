@@ -84,6 +84,15 @@ if ($result[0]["clock_out"]) {
 	$clocked = false;
 }
 
+//fetch goal
+$select = "SELECT goal 
+			FROM weekly_goals 
+			WHERE student_id = :student_id";
+$stmt = $dbc->prepare($select);
+$stmt->bindValue(':student_id', $_SESSION["id"], PDO::PARAM_STR);
+$stmt->execute();
+$goal = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
 ?>
 <html ng-app="login">
@@ -92,7 +101,7 @@ if ($result[0]["clock_out"]) {
 	<meta name="author" content="Timothy Birrell">
 
 	
-	<title>Time Tracker</title>
+	<title>Clock</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -100,7 +109,7 @@ if ($result[0]["clock_out"]) {
 
 	<style>
 
-		.clockin {
+		.clockin, .alert {
 			width: 500px;
 			max-width: 100%;
 			margin: 35px auto;
@@ -129,6 +138,10 @@ if ($result[0]["clock_out"]) {
 <body onload="startTime()">
 	<?php require_once '../views/headerstudent.php'; ?>
 	<div id="clock"></div>
+	<div class="alert alert-info" role="alert">
+		<strong>Weekly Goal:</strong>
+		<?= $goal[0]["goal"]; ?>
+	</div>
 	<div class="panel panel-default clockin">
 		<div class="panel-body">
 			<?php if ($clocked) : ?>

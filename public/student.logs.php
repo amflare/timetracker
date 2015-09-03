@@ -42,7 +42,6 @@ $stmt = $dbc->prepare($select);
 $stmt->bindValue(':monday', $monday, PDO::PARAM_STR);
 $stmt->execute();
 $lengths = $stmt->fetchAll(PDO::FETCH_ASSOC);
-var_dump($lengths);
 
 // add time
 $totalTime = new DateTime('00:00:00');

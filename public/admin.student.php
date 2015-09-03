@@ -35,6 +35,22 @@ if (Input::has("standingChange")) {
 
 }
 
+// check if change goal prompted refresh
+if (Input::has("editGoal")) {
+	// change goal in DB
+	$id = Input::get("id");
+	$goal = Input::get("editGoal");
+
+	$update = "UPDATE weekly_goals 
+ 				SET goal = :goal 
+ 				WHERE student_id = :student_id";
+	$stmt = $dbc->prepare($update);
+	$stmt->bindValue(':goal', $goal, PDO::PARAM_STR);
+	$stmt->bindValue(':student_id', $id, PDO::PARAM_STR);
+	$stmt->execute();
+
+}
+
 // check if add timelog promted refresh
 if (Input::has("pickDate")) {
 	$insert = "INSERT INTO timelogs (date_logged, clock_in, goal, student_id) 
@@ -110,6 +126,14 @@ $firstName = ucfirst($name[0]);
 $lastName = ucfirst($name[1]);
 $fullName = $firstName . " " . $lastName;
 
+//fetch goal
+$select = "SELECT goal 
+			FROM weekly_goals 
+			WHERE student_id = :student_id";
+$stmt = $dbc->prepare($select);
+$stmt->bindValue(':student_id', Input::get('id'), PDO::PARAM_STR);
+$stmt->execute();
+$goal = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <html ng-app="login">
@@ -166,13 +190,16 @@ $fullName = $firstName . " " . $lastName;
 	.editStanding {
 		font-size: 1.4rem;
 	}
+	.editGoal {
+		font-size: 1.4rem;
+		color: #FFF;
+	}
 	.btn {
 		margin-bottom: 20px;
 	}
-	#standingModal {
-		top: 25%;
-	}
-	#addLogModal {
+	#standingModal,
+	#addLogModal,
+	#goalModal {
 		top: 25%;
 	}
 	.formMargin {
@@ -223,11 +250,29 @@ $fullName = $firstName . " " . $lastName;
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="goalModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<form class="formMargin" method="post">
+					<div class="form-group">
+						<textarea name="editGoal" class="form-control"><?= $goal[0]["goal"]; ?></textarea>
+					</div>
+					<div class="form-group">
+						<button class="btn btn-success">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 	<div class="studentName">
 		-- <?= $fullName ?> --
 	</div>
 	<div class="standing">
 		<?= $logs[0]["standing"] ?> <a href="#" data-toggle="modal" data-target="#standingModal"><span class="editStanding glyphicon glyphicon-edit"></span></a>
+	</div>
+	<div class="alert alert-info" role="alert">
+		<strong>Weekly Goal:</strong>
+		<?= $goal[0]["goal"]; ?> <a href="#" data-toggle="modal" data-target="#goalModal"><span class="editGoal glyphicon glyphicon-edit"></span></a>
 	</div>
 	<div class="everything">
 		<div class="progress">
