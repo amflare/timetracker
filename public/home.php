@@ -71,9 +71,9 @@ require_once '../bootstrap-student.php';
 						<div class="form-group">
 							<input type="password" class="form-control" name="adminPass" placeholder="Password">
 						</div>
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<a href="#" class="forgotPass">Forgot Password</a>
-						</div>
+						</div> -->
 						<div class="form-group">
 							<button class="btn btn-success">Login</button>
 						</div>
