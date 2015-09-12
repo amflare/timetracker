@@ -160,7 +160,7 @@ $goal = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			<form method="POST">
 				<div class="form-group">
 					<input type="checkbox" name="metGoal">
-					I achived my goal today
+					I achieved my goal today
 				</div>
 				<div class="form-group">
 					<input type="hidden" name="clockout" value="set">

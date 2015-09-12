@@ -141,7 +141,7 @@ $log = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				<textarea class="form-control" name="setGoal" id="setGoal"><?= $log[0]["goal"] ?></textarea>
 			</div>
 			<div class="form-group">
-				<label for="metGoal">Goal Achived?</label>
+				<label for="metGoal">Goal Achieved?</label>
 				<input type="checkbox" name="metGoal" id="metGoal" <?php if ($log[0]["goal_reached"] == "1") {echo "checked";} ?>>
 			</div>
 			<div class="form-group">
