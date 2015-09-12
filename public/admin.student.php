@@ -95,6 +95,9 @@ $lengths = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // add time
 $totalTime = new DateTime('00:00:00');
 foreach ($lengths as $length) {
+	var_dump($length["length"]);
+	if ($length["length"] != null){
+	}
 	if ($length["length"]) {
 		$time = new DateTime($length["length"]);
 		$time = $time->format('\P\TH\Hi\Ms\S');
@@ -113,7 +116,7 @@ $time_seconds = isset($seconds) ? $hours * 3600 + $minutes * 60 + $seconds : $ho
 $twelve = 43200;
 $percent = ($time_seconds / $twelve) * 100;
 $percent = round($percent);
-if (empty($lengths)) {
+if (empty($lengths) || $length["length"] == null) {
 	$percent = 0;
 	$schoolHours = "00:00:00";
 

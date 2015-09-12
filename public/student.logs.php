@@ -64,6 +64,11 @@ $time_seconds = isset($seconds) ? $hours * 3600 + $minutes * 60 + $seconds : $ho
 $twelve = 43200;
 $percent = ($time_seconds / $twelve) * 100;
 $percent = round($percent);
+if (empty($lengths) || $length["length"] == null) {
+	$percent = 0;
+	$schoolHours = "00:00:00";
+
+}
 
 ?>
 <html ng-app="login">
