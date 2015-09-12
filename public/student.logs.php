@@ -52,7 +52,7 @@ foreach ($lengths as $length) {
 		$totalTime->add(new DateInterval($time));
 	}
 }
-$schoolHours = $totalTime->format('h:i:s');
+$schoolHours = $totalTime->format('H:i:s');
 
 // caluclate percentage
 //find time in seconds

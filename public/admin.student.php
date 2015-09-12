@@ -95,7 +95,6 @@ $lengths = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // add time
 $totalTime = new DateTime('00:00:00');
 foreach ($lengths as $length) {
-	var_dump($length["length"]);
 	if ($length["length"] != null){
 	}
 	if ($length["length"]) {
@@ -104,7 +103,7 @@ foreach ($lengths as $length) {
 		$totalTime->add(new DateInterval($time));
 	}
 }
-$schoolHours = $totalTime->format('h:i:s');
+$schoolHours = $totalTime->format('H:i:s');
 
 // caluclate percentage
 //find time in seconds
