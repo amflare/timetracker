@@ -78,6 +78,9 @@ $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // determine time total
 // find monday
 $dw = date( "w", strtotime(date("Y-m-d")));
+if ($dw == 0) {
+	$dw = 8;
+}
 $date = new DateTime(date("Y-m-d"));
 $date->sub(new DateInterval('P' . ($dw - 1) . 'D'));
 $monday = $date->format('Y-m-d');
