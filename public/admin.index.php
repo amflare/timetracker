@@ -31,7 +31,6 @@ $select = "SELECT *
 			FROM timelogs t 
 			JOIN students s ON s.id = t.student_id
 			WHERE t.date_logged >= :monday
-			AND t.student_id = 2
 			ORDER BY t.id DESC 
 			LIMIT 25";
 $stmt = $dbc->prepare($select);
