@@ -16,12 +16,14 @@ $monday = $date->format('Y-m-d');
 // fetch logs
 $select = "SELECT id, username 
 			FROM students
+			WHERE standing != 'inactive'
 			ORDER BY username";
 $stmt = $dbc->query($select);
 $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 function findTime($id, $dbc, $monday = null) {
 	if (!$monday) {
+		//if not historical record
 		// find monday
 		$dw = date( "w", strtotime(date("Y-m-d")));
 		$date = new DateTime(date("Y-m-d"));
@@ -30,26 +32,27 @@ function findTime($id, $dbc, $monday = null) {
 		}
 		$date->sub(new DateInterval('P' . ($dw - 1) . 'D'));
 		$monday = $date->format('Y-m-d');
-		//find friday
-		$friday = new DateTime(date("Y-m-d"));
-		$friday = $friday->format('Y-m-d');
+		//find saturday (not really saturday, but you should not have records past today)
+		$saturday = new DateTime(date("Y-m-d"));
+		$saturday = $saturday->format('Y-m-d');
 	} else {
+		//if histroical record
 		$date = new DateTime($monday);
 		$monday = $date->format('Y-m-d');
-		$friday = new DateTime($monday);
-		$friday->add(new DateInterval('P4D'));
-		$friday = $friday->format('Y-m-d');
+		$saturday = new DateTime($monday);
+		// add to find saturdays date
+		$saturday->add(new DateInterval('P5D'));
+		$saturday = $saturday->format('Y-m-d');
 	}
-
 	// fetch logs
 	$select = "SELECT length 
 				FROM timelogs 
 				WHERE student_id = $id 
 				AND date_logged >= :monday
-				AND date_logged <= :friday";
+				AND date_logged <= :saturday";
 	$stmt = $dbc->prepare($select);
 	$stmt->bindValue(':monday', $monday, PDO::PARAM_STR);
-	$stmt->bindValue(':friday', $friday, PDO::PARAM_STR);
+	$stmt->bindValue(':saturday', $saturday, PDO::PARAM_STR);
 	$stmt->execute();
 	$lengths = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
