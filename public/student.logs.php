@@ -4,6 +4,8 @@ $_SESSION["pageRank"] = "student";
 
 require_once '../bootstrap-student.php';
 
+date_default_timezone_set('America/Chicago');
+
 function convertDate($date, $time) {
 	if ($date && $time) {
 		$date = new DateTime($date);
@@ -55,6 +57,28 @@ foreach ($lengths as $length) {
 		$totalTime->add(new DateInterval($time));
 	}
 }
+
+//add clocked in time
+//fetch from db
+$today = date('Y-m-d');
+$select = "SELECT clock_in
+			FROM timelogs
+			WHERE length IS NULL
+			AND date_logged = :today";
+$stmt = $dbc->prepare($select);
+$stmt->bindValue(':today', $today, PDO::PARAM_STR);
+$res = $stmt->execute();
+$clockIn = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// get diff
+$now = new DateTime(date('Y-m-d H:i:s'));
+$then = new DateTime($clockIn[0]["clock_in"]);
+$diff = $then->diff($now);
+
+$time = new DateTime($diff->h .':'. $diff->i .':'. $diff->s);
+$time = $time->format('\P\TH\Hi\Ms\S');
+$totalTime->add(new DateInterval($time));
+
 $schoolHours = $totalTime->format('H:i:s');
 
 // caluclate percentage
@@ -67,7 +91,7 @@ $time_seconds = isset($seconds) ? $hours * 3600 + $minutes * 60 + $seconds : $ho
 $twelve = 43200;
 $percent = ($time_seconds / $twelve) * 100;
 $percent = round($percent);
-if (empty($lengths) || $length["length"] == null) {
+if ((empty($lengths) || $length["length"] == null) && empty($clockIn)) {
 	$percent = 0;
 	$schoolHours = "00:00:00";
 
