@@ -61,23 +61,26 @@ foreach ($lengths as $length) {
 //add clocked in time
 //fetch from db
 $today = date('Y-m-d');
-$select = "SELECT clock_in
+$select = "SELECT *
 			FROM timelogs
 			WHERE length IS NULL
-			AND date_logged = :today";
+			AND date_logged = :today
+			AND student_id = $studentid";
 $stmt = $dbc->prepare($select);
 $stmt->bindValue(':today', $today, PDO::PARAM_STR);
 $res = $stmt->execute();
 $clockIn = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// get diff
-$now = new DateTime(date('Y-m-d H:i:s'));
-$then = new DateTime($clockIn[0]["clock_in"]);
-$diff = $then->diff($now);
+if (!empty($clockIn)) {
+	// get diff
+	$now = new DateTime(date('Y-m-d H:i:s'));
+	$then = new DateTime($clockIn[0]["clock_in"]);
+	$diff = $then->diff($now);
 
-$time = new DateTime($diff->h .':'. $diff->i .':'. $diff->s);
-$time = $time->format('\P\TH\Hi\Ms\S');
-$totalTime->add(new DateInterval($time));
+	$time = new DateTime($diff->h .':'. $diff->i .':'. $diff->s);
+	$time = $time->format('\P\TH\Hi\Ms\S');
+	$totalTime->add(new DateInterval($time));
+}
 
 $schoolHours = $totalTime->format('H:i:s');
 
