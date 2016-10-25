@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once '../bootstrap-student.php';
 
@@ -10,7 +10,7 @@ if (Input::has("dailyGoal")) {
 	$date = date("Y-m-d");
 	$time = date("H:i:s");
 
-	$insert = "INSERT INTO timelogs (date_logged, clock_in, goal, student_id) 
+	$insert = "INSERT INTO timelogs (date_logged, clock_in, goal, student_id)
 				VALUES (:date_logged, :clock_in, :goal, :student_id)";
 	$stmt = $dbc->prepare($insert);
 	$stmt->bindValue(':date_logged', $date, PDO::PARAM_STR);
@@ -55,11 +55,11 @@ if (Input::has("clockout")) {
 	}
 
 	// update timelogs
- 	$update = "UPDATE timelogs 
- 				SET date_out = :date_out, 
- 				clock_out = :clock_out, 
- 				length = :length, 
- 				goal_reached = :goal_reached 
+ 	$update = "UPDATE timelogs
+ 				SET date_out = :date_out,
+ 				clock_out = :clock_out,
+ 				length = :length,
+ 				goal_reached = :goal_reached
  				WHERE id = $maxId";
 	$stmt = $dbc->prepare($update);
 	$stmt->bindValue(':date_out', $date, PDO::PARAM_STR);
@@ -84,9 +84,25 @@ if ($result[0]["clock_out"]) {
 	$clocked = false;
 }
 
+// check if change goal prompted refresh
+if (Input::has("editGoal")) {
+	// change goal in DB
+	$id = $_SESSION["id"];
+	$goal = Input::get("editGoal");
+
+	$update = "UPDATE weekly_goals
+ 				SET goal = :goal
+ 				WHERE student_id = :student_id";
+	$stmt = $dbc->prepare($update);
+	$stmt->bindValue(':goal', $goal, PDO::PARAM_STR);
+	$stmt->bindValue(':student_id', $id, PDO::PARAM_STR);
+	$stmt->execute();
+
+}
+
 //fetch goal
-$select = "SELECT goal 
-			FROM weekly_goals 
+$select = "SELECT goal
+			FROM weekly_goals
 			WHERE student_id = :student_id";
 $stmt = $dbc->prepare($select);
 $stmt->bindValue(':student_id', $_SESSION["id"], PDO::PARAM_STR);
@@ -100,7 +116,7 @@ $goal = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	<meta charset="UTF-8">
 	<meta name="author" content="Timothy Birrell">
 
-	
+
 	<title>Clock</title>
 
 	<!-- Bootstrap core CSS -->
@@ -132,6 +148,16 @@ $goal = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		#goal {
 			font-weight: bold;
 		}
+		.editGoal {
+			color: #FFF;
+			float: right;
+		}
+		#goalModal {
+			top: 25%;
+		}
+		#goalModal .modal-content {
+			padding: 0 15px;
+		}
 
 	</style>
 </head>
@@ -139,8 +165,9 @@ $goal = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	<?php require_once '../views/headerstudent.php'; ?>
 	<div id="clock"></div>
 	<div class="alert alert-info" role="alert">
-		<strong>Weekly Goal:</strong>
+		<strong>Current Subject:</strong>
 		<?= $goal[0]["goal"]; ?>
+		<a href="#" data-toggle="modal" data-target="#goalModal"><span class="editGoal glyphicon glyphicon-edit"></span></a>
 	</div>
 	<div class="panel panel-default clockin">
 		<div class="panel-body">
@@ -171,6 +198,22 @@ $goal = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		</div>
 	</div>
 	<?php require_once '../views/footer.php'; ?>
+
+	<!-- goal modal -->
+	<div class="modal fade" id="goalModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<form class="formMargin" method="post">
+					<div class="form-group">
+						<input type="text" name="editGoal" class="form-control" value="<?= $goal[0]["goal"]; ?>">
+					</div>
+					<div class="form-group">
+						<button class="btn btn-success">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
 <script>
 

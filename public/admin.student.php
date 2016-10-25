@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $_SESSION["pageRank"] = "admin";
 
@@ -25,8 +25,8 @@ if (Input::has("standingChange")) {
 	$id = Input::get("id");
 	$standing = Input::get("standingChange");
 
-	$update = "UPDATE students 
- 				SET standing = :standing 
+	$update = "UPDATE students
+ 				SET standing = :standing
  				WHERE id = :id";
 	$stmt = $dbc->prepare($update);
 	$stmt->bindValue(':standing', $standing, PDO::PARAM_STR);
@@ -41,8 +41,8 @@ if (Input::has("editGoal")) {
 	$id = Input::get("id");
 	$goal = Input::get("editGoal");
 
-	$update = "UPDATE weekly_goals 
- 				SET goal = :goal 
+	$update = "UPDATE weekly_goals
+ 				SET goal = :goal
  				WHERE student_id = :student_id";
 	$stmt = $dbc->prepare($update);
 	$stmt->bindValue(':goal', $goal, PDO::PARAM_STR);
@@ -53,7 +53,7 @@ if (Input::has("editGoal")) {
 
 // check if add timelog promted refresh
 if (Input::has("pickDate")) {
-	$insert = "INSERT INTO timelogs (date_logged, clock_in, goal, student_id) 
+	$insert = "INSERT INTO timelogs (date_logged, clock_in, goal, student_id)
 				VALUES (:date_logged, :clock_in, :goal, :student_id)";
 	$stmt = $dbc->prepare($insert);
 	$stmt->bindValue(':date_logged', Input::get('pickDate'), PDO::PARAM_STR);
@@ -69,8 +69,8 @@ $studentid = Input::get("id");
 $select = "SELECT * , t.id
 			FROM timelogs t
 			JOIN students s ON s.id = t.student_id
-			WHERE t.student_id = $studentid 
-			ORDER BY t.id DESC 
+			WHERE t.student_id = $studentid
+			ORDER BY t.id DESC
 			LIMIT 25";
 $stmt = $dbc->query($select);
 $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -86,9 +86,9 @@ $date->sub(new DateInterval('P' . ($dw - 1) . 'D'));
 $monday = $date->format('Y-m-d');
 
 // fetch logs
-$select = "SELECT length 
-			FROM timelogs 
-			WHERE student_id = $studentid 
+$select = "SELECT length
+			FROM timelogs
+			WHERE student_id = $studentid
 			AND date_logged >= :monday";
 $stmt = $dbc->prepare($select);
 $stmt->bindValue(':monday', $monday, PDO::PARAM_STR);
@@ -132,8 +132,8 @@ $lastName = ucfirst($name[1]);
 $fullName = $firstName . " " . $lastName;
 
 //fetch goal
-$select = "SELECT goal 
-			FROM weekly_goals 
+$select = "SELECT goal
+			FROM weekly_goals
 			WHERE student_id = :student_id";
 $stmt = $dbc->prepare($select);
 $stmt->bindValue(':student_id', Input::get('id'), PDO::PARAM_STR);
@@ -146,7 +146,7 @@ $goal = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	<meta charset="UTF-8">
 	<meta name="author" content="Timothy Birrell">
 
-	
+
 	<title><?= $fullName ?></title>
 
 	<!-- Bootstrap core CSS -->
@@ -276,7 +276,7 @@ $goal = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<?= $logs[0]["standing"] ?> <a href="#" data-toggle="modal" data-target="#standingModal"><span class="editStanding glyphicon glyphicon-edit"></span></a>
 	</div>
 	<div class="alert alert-info" role="alert">
-		<strong>Weekly Goal:</strong>
+		<strong>Current Subject:</strong>
 		<?= $goal[0]["goal"]; ?> <a href="#" data-toggle="modal" data-target="#goalModal"><span class="editGoal glyphicon glyphicon-edit"></span></a>
 	</div>
 	<div class="everything">

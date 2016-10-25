@@ -201,6 +201,9 @@ body.no-bottom-padding article {
 				<li <?php if ($_SERVER["REQUEST_URI"] == "/student/logs") {echo "class='current-menu-item'";} ?>>
 					<a href="http://<?= URL ?>/student/logs">Time Logs</a>
 				</li>
+        <li>
+          <a href="<?= $_SESSION['calendly']?>"><span class="glyphicon glyphicon-calendar" data-toggle="tooltip" data-placement="bottom" title="Schedule a Mentor Meeting"></span></a>
+        </li>
 				<li class="highlight">
 					<a href="http://<?= URL ?>/logout">Logout</a>
 				</li>

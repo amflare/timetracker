@@ -1,19 +1,25 @@
-<?php 
+<?php
 
 $_SESSION["pageRank"] = "admin";
 
 require_once '../bootstrap-admin.php';
 
 //fetch cohorts
-$select = "SELECT * 
+$select = "SELECT *
 			FROM cohorts";
 $stmt = $dbc->query($select);
 $cohorts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+//fetch admins
+$select = "SELECT *
+			FROM admins";
+$stmt = $dbc->query($select);
+$admins = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 $success = false;
 
 // if form has been submitted
-if (Input::has("accountType")) {	
+if (Input::has("accountType")) {
 	// determin the correct type of account to create
 	switch (Input::get("accountType")) {
 		case 'student':
@@ -33,16 +39,16 @@ function addStudent($dbc){
 	$standing = "Good";
 	$insert = "INSERT INTO students (
 					username,
-					first_name, 
-					last_name, 
-					email, 
+					first_name,
+					last_name,
+					email,
 					standing,
 					cohort
-					) 
+					)
 				VALUES (
 					:username,
-					:first_name, 
-					:last_name, 
+					:first_name,
+					:last_name,
 					:email,
 					:standing,
 					:cohort
@@ -63,9 +69,9 @@ function addStudent($dbc){
 function addAdmin($dbc){
 	$password = password_hash(Input::get('adminPass'), PASSWORD_DEFAULT);
 	$insert = "INSERT INTO admins (
-					email, 
+					email,
 					password
-					) 
+					)
 				VALUES (
 					:email,
 					:password
@@ -81,13 +87,16 @@ function addAdmin($dbc){
 }
 function addCohort($dbc){
 	$insert = "INSERT INTO cohorts (
-					name
-					) 
+					name,
+					admin
+					)
 				VALUES (
-					:name
+					:name,
+					:admin
 					)";
 	$stmt = $dbc->prepare($insert);
 	$stmt->bindValue(':name', Input::get('cohortName'), PDO::PARAM_STR);
+	$stmt->bindValue(':name', Input::get('cohortMentor'), PDO::PARAM_STR);
 
 	$stmt->execute();
 
@@ -101,7 +110,7 @@ function addCohort($dbc){
 	<meta charset="UTF-8">
 	<meta name="author" content="Timothy Birrell">
 
-	
+
 	<title>New Account</title>
 
 	<!-- Bootstrap core CSS -->
@@ -113,7 +122,7 @@ function addCohort($dbc){
 	<!-- Alertify -->
 	<link rel="stylesheet" href="/css/alertify.core.css">
 	<link rel="stylesheet" href="/css/alertify.default.css">
-	
+
 	<link href="/css/custom.css" rel="stylesheet">
 
 	<style>
@@ -202,6 +211,14 @@ function addCohort($dbc){
 						<form method="post" action="#">
 							<div class="form-group">
 								<input type="text" class="form-control" name="cohortName" placeholder="Cohort Name">
+							</div>
+							<div class="form-group">
+								<select class="form-control" name="cohortMentor">
+									<option>Select Coach</option>
+									<?php foreach ($admins as $admin) : ?>
+										<option value="<?= $admin["id"] ?>"><?= ucfirst(explode('@', $admin["email"])[0]) ?></option>
+									<?php endforeach; ?>
+								</select>
 							</div>
 							<div class="form-group">
 								<input type="hidden" name="accountType" value="cohort">

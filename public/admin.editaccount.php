@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $_SESSION["pageRank"] = "admin";
 
@@ -10,7 +10,7 @@ $error = false;
 $success = false;
 
 //fetch cohorts
-$select = "SELECT * 
+$select = "SELECT *
 			FROM cohorts";
 $stmt = $dbc->query($select);
 $cohorts = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -41,10 +41,10 @@ if (Input::has("add")) {
 	} else if ($type == "admin") {
 		$admin = fetchAdmin($id, $dbc);
 	}
-}	
+}
 
 function fetchStudent($id, $dbc) {
-	$select = "SELECT * 
+	$select = "SELECT *
 				FROM students
 				WHERE id = $id";
 	$stmt = $dbc->query($select);
@@ -52,15 +52,15 @@ function fetchStudent($id, $dbc) {
 }
 
 function fetchAdmin($id, $dbc) {
-	$select = "SELECT * 
+	$select = "SELECT *
 				FROM admins
 				WHERE id = $id";
 	$stmt = $dbc->query($select);
 	return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}	
+}
 
 function addStudent($id, $dbc) {
-	$update = "UPDATE students 
+	$update = "UPDATE students
  				SET username = :username,
  				first_name = :first_name,
  				last_name = :last_name,
@@ -83,7 +83,7 @@ function addAdmin($id, $dbc) {
 	// if wants to change admin pass
 	if (Input::has("willChangePass")) {
 		//find old pass
-		$select = "SELECT password 
+		$select = "SELECT password
 					FROM admins
 					WHERE id = $id";
 		$stmt = $dbc->query($select);
@@ -91,7 +91,7 @@ function addAdmin($id, $dbc) {
 
 		// check to see if old password matches
 		if (password_verify(Input::get("oldPass"), $pass[0]["password"])) {
-			$update = "UPDATE admins 
+			$update = "UPDATE admins
 						SET email = :email,
 						password = :password
 						WHERE id = $id";
@@ -99,17 +99,18 @@ function addAdmin($id, $dbc) {
 			$stmt->bindValue(':email', Input::get('email'), PDO::PARAM_STR);
 			$stmt->bindValue(':password', password_hash(Input::get('newPass'), PASSWORD_DEFAULT), PDO::PARAM_STR);
 			$stmt->execute();
-		} else { 
+		} else {
 		// if not
 			return "error";
 		}
-	//if only changing email
+	//if changing other info
 	} else {
-		$update = "UPDATE admins 
-					SET email = :email
+		$update = "UPDATE admins
+					SET email = :email, calendly = :calendly
 					WHERE id = $id";
 		$stmt = $dbc->prepare($update);
 		$stmt->bindValue(':email', Input::get('email'), PDO::PARAM_STR);
+		$stmt->bindValue(':calendly', Input::get('calendly'), PDO::PARAM_STR);
 		$stmt->execute();
 	}
 
@@ -123,7 +124,7 @@ function addAdmin($id, $dbc) {
 	<meta charset="UTF-8">
 	<meta name="author" content="Timothy Birrell">
 
-	
+
 	<title>New Account</title>
 
 	<!-- Bootstrap core CSS -->
@@ -135,7 +136,7 @@ function addAdmin($id, $dbc) {
 	<!-- Alertify -->
 	<link rel="stylesheet" href="/css/alertify.core.css">
 	<link rel="stylesheet" href="/css/alertify.default.css">
-	
+
 	<link href="/css/custom.css" rel="stylesheet">
 
 	<style>
@@ -197,11 +198,14 @@ function addAdmin($id, $dbc) {
 				<!-- EDIT ADMIN -->
 				<form class="adminForm" method="post">
 					<div class="form-group">
-						<input type="email" class="form-control" name="email" value="<?= $admin[0]["email"] ?>">
+						<input type="email" class="form-control" name="email" value="<?= $admin[0]["email"] ?>" placeholder="Email">
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" name="calendly" value="<?= $admin[0]["calendly"] ?>" placeholder="Calendly Link">
 					</div>
 					<div class="form-group">
 						I am changing the password
-						<input type="checkbox" class="form-control" name="willChangePass">
+						<input type="checkbox" name="willChangePass">
 					</div>
 					<div class="form-group">
 						<input type="password" class="form-control" name="oldPass" placeholder="Old Password">
